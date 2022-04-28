@@ -2,19 +2,35 @@ package p5;
 
 import java.util.*;
 
-public class SortedList<T> extends ArrayList<T> implements Comparable<T> {
+public class SortedList<T extends Comparable<T>> extends ArrayList<T> implements Comparator<T> {
+    ArrayList<Comparator<? super T>> compar;
 
     public SortedList(List<T> list) {
+        this.compar = new ArrayList<>();
         this.addAll(list);
+        Collections.sort(this, this);
     }
 
-    public void addCriterion(Comparator<T> comparator) {
+    public SortedList() {
+        this.compar = new ArrayList<>();
+    }
+
+    public void addCriterion(Comparator<? super T> comparator) {
+        this.compar.add(comparator);
+        Collections.sort(this, this);
     }
 
     @Override
-    public int compareTo(T o) {
-        // TODO Auto-generated method stub
-        return 0;
+    public int compare(T arg0, T arg1) {
+        int dif = arg0.compareTo(arg1);
+        if (dif == 0) {
+            for (Comparator<? super T> c : this.compar) {
+                dif = c.compare(arg0, arg1);
+                if (dif != 0) {
+                    return dif;
+                }
+            }
+        }
+        return dif;
     }
-
 }

@@ -1,6 +1,7 @@
 package p5;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Person implements Comparable<Person> {
     String nombre;
@@ -11,7 +12,7 @@ public class Person implements Comparable<Person> {
         this.fecha = fecha;
     }
 
-    public String getNombre() {
+    public String getName() {
         return this.nombre;
     }
 
@@ -19,13 +20,18 @@ public class Person implements Comparable<Person> {
         return this.fecha;
     }
 
+    public int getAge() {
+        return Period.between(this.fecha, LocalDate.now()).getYears();
+    }
+
     @Override
     public int compareTo(Person o) {
-        if (this.nombre.compareTo(o.nombre) < 0) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return this.nombre.compareTo(o.getName());
+    }
+
+    @Override
+    public String toString() {
+        return (this.nombre + " (born: " + this.fecha + ")");
     }
 
 }
