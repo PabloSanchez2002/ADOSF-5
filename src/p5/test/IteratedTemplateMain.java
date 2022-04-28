@@ -1,6 +1,9 @@
 package p5.test;
 
-import p5.Person;
+import java.time.LocalDate;
+import java.util.Map;
+
+import p5.*;
 
 // add package declarations and imports
 
@@ -19,12 +22,12 @@ public class IteratedTemplateMain {
 
 	public static Template<Person> createLetterTemplate() {
 		Template<Person> simpleLetter = TemplateMain.createLetterTemplate();
-		simpleLetter.addWhen(p -> p.getAge() >= 65, "Contact us if thinking about retirement...")
-				.addWhen(p -> p.getMascots().size() > 0, "... and greetings to your mascots:")
-				.addForEach(p -> p.getMascots(),
-						"  Ey ##, you are a nice ##!",
-						m -> m.getMascotName(),
-						m -> m.getMascotType());
+		simpleLetter.addWhen(p -> p.getAge() >= 65, "Contact us if thinking about retirement...");
+		simpleLetter.addWhen(p -> p.getMascots().size() > 0, "... and greetings to your mascots:");
+		simpleLetter.addForEach(p -> p.getMascots(),
+				"  Ey ##, you are a nice ##!",
+				m -> m.getMascotName(),
+				m -> m.getMascotType());
 		return simpleLetter;
 	}
 

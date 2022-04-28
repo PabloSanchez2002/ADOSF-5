@@ -2,10 +2,12 @@ package p5;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
 public class Person implements Comparable<Person> {
-    String nombre;
-    LocalDate fecha;
+    private String nombre;
+    private LocalDate fecha;
+    private ArrayList<Mascot> mascotas;
 
     public Person(String nombre, LocalDate fecha) {
         this.nombre = nombre;
@@ -32,6 +34,16 @@ public class Person implements Comparable<Person> {
     @Override
     public String toString() {
         return (this.nombre + " (born: " + this.fecha + ")");
+    }
+
+    public void addMascots(Mascot... m) {
+        for (Mascot mas : m) {
+            this.mascotas.add(mas);
+        }
+    }
+
+    public ArrayList<Mascot> getMascots() {
+        return this.mascotas;
     }
 
 }

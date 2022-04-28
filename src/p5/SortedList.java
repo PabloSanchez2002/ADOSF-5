@@ -3,7 +3,7 @@ package p5;
 import java.util.*;
 
 public class SortedList<T extends Comparable<T>> extends ArrayList<T> implements Comparator<T> {
-    ArrayList<Comparator<? super T>> compar;
+    private ArrayList<Comparator<? super T>> compar;
 
     public SortedList(List<T> list) {
         this.compar = new ArrayList<>();
