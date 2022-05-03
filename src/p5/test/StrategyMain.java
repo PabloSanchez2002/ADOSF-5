@@ -1,6 +1,12 @@
 package p5.test;
 
+import java.util.Map;
+
 import p5.Person;
+import p5.Template;
+import p5.ej4.FilePersister;
+import p5.ej4.TimeStamper;
+import p5.ej4.UpperCaser;
 
 // add package declarations and imports
 
