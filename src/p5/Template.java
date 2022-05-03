@@ -178,20 +178,34 @@ public class Template<T extends Comparable<T>> {
 
         /**
          * 
-         * @return
+         * @return function that return the ArrayList
          */
         public Function<T, ArrayList<R>> getfunct() {
             return this.funct;
         }
 
+        /**
+         * 
+         * @return string
+         */
         public String getString() {
             return this.s;
         }
 
+        /**
+         * 
+         * @return ArrayList of funciones
+         */
         public ArrayList<Function<R, Object>> getFunciones() {
             return this.funciones;
         }
 
+        /**
+         * Executes the object functionality
+         * 
+         * @param p person
+         * @return String created
+         */
         public String execute(T p) {
             ArrayList<R> list = this.funct.apply(p);
             String replace = "";
@@ -210,12 +224,25 @@ public class Template<T extends Comparable<T>> {
 
     }
 
+    /**
+     * Adds a Line object to template
+     * 
+     * @param s         string
+     * @param funciones funciones
+     * @return this template
+     */
     @SafeVarargs
     public final Template<T> add(String s, Function<T, Object>... funciones) {
         this.lines.add(new Line(s, funciones));
         return this;
     }
 
+    /**
+     * Adds many object to the sorted list
+     * 
+     * @param list list of objects
+     * @return this Template
+     */
     @SafeVarargs
     public final Template<T> addObjects(T... list) {
         for (T o : list) {
@@ -224,10 +251,20 @@ public class Template<T extends Comparable<T>> {
         return this;
     }
 
+    /**
+     * Adds a sorting criteira
+     * 
+     * @param comp comparator to add
+     */
     public void withSortingCriteria(Comparator<? super T> comp) {
         this.sorted.addCriterion(comp);
     }
 
+    /**
+     * emits the map with an entry for each object in the sorted list
+     * 
+     * @return the map created
+     */
     public Map<T, String> emit() {
         Map<T, String> map = new HashMap<>();
 
@@ -238,6 +275,12 @@ public class Template<T extends Comparable<T>> {
         return map;
     }
 
+    /**
+     * emit function but for one single person
+     * 
+     * @param p person
+     * @return the string of the person
+     */
     public String emit(T p) {
         String s = "";
         for (Line l : this.lines) {
@@ -263,21 +306,44 @@ public class Template<T extends Comparable<T>> {
         return s;
     }
 
+    /**
+     * adds a new predicate to the Template
+     * 
+     * @param p predicate
+     * @param s string
+     * @return this Template
+     */
     public Template<T> addWhen(Predicate<T> p, String s) {
         this.preds.add(new Predicates(s, p));
         return this;
     }
 
+    /**
+     * adds a new Lambda object to the Template
+     * 
+     * @param <R>    parameter that return the main functions
+     * @param funct  function that return an Array of R
+     * @param s      String
+     * @param others other functions to replace the String
+     */
     @SafeVarargs
     public final <R> void addForEach(Function<T, ArrayList<R>> funct, String s, Function<R, Object>... others) {
         this.lambdas.add(new Lambdas<R>(funct, s, others));
     }
 
+    /**
+     * Adds many strategies to the Template
+     * 
+     * @param strats
+     */
     @SafeVarargs
     public final void withOptions(Strategy<T>... strats) {
         this.estrategs = new ArrayList<>(Arrays.asList(strats));
     }
 
+    /**
+     * Exexutes all the strategies on the template
+     */
     public void executeStrategy() {
         for (T p : this.sorted) {
             String s = emit(p);
