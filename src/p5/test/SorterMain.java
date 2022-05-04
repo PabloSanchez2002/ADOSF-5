@@ -9,7 +9,6 @@ import java.util.*;
 // add package declarations and imports
 
 public class SorterMain {
-
 	public static void main(String[] args) {
 		SortedList<Person> sorted = createPeopleList();
 		List<Person> list = sorted; // SortedList is compatible with List

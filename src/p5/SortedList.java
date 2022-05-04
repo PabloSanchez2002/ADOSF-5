@@ -49,7 +49,7 @@ public class SortedList<T extends Comparable<T>> extends ArrayList<T> implements
         int dif = arg0.compareTo(arg1);
         if (dif == 0) {
             for (Comparator<? super T> c : this.compar) {
-                dif = c.compare(arg1, arg0);
+                dif = c.compare(arg0, arg1);
                 if (dif != 0) {
                     return dif;
                 }
