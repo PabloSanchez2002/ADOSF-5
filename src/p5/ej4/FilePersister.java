@@ -3,7 +3,7 @@ package p5.ej4;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -30,7 +30,7 @@ public class FilePersister<T> extends Strategy<T> {
      */
     public FilePersister(Function<T, ? extends Object> func) {
         this.func = func;
-        map = new HashMap<String, Integer>();
+        map = new LinkedHashMap<String, Integer>();
     }
 
     /**

@@ -3,7 +3,7 @@ package p5;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -266,7 +266,7 @@ public class Template<T extends Comparable<T>> {
      * @return the map created
      */
     public Map<T, String> emit() {
-        Map<T, String> map = new HashMap<>();
+        Map<T, String> map = new LinkedHashMap<>();
 
         for (T p : this.sorted) {
             String s = emit(p);
